@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 from llama_stack_client import LlamaStackClient, Agent
 from llama_stack_client.types import Document
+from llama_stack_client import RAGDocument
 import uuid
 import os
 import markdown
@@ -80,8 +81,8 @@ def initialize_llama_stack():
         
         # List of city PDF URLs for ingestion
         permit_pdf_urls = [
-            "http://denvergov.org/content/dam/denvergov/Portals/771/documents/PHI/Food/RevisedFoodRulesandregulationsApril2017compressed.pdf",
-            "https://denver.prelive.opencities.com/files/assets/public/v/1/public-health-and-environment/documents/phi/2022_mobileunitguide.pdf"
+            ("http://denvergov.org/content/dam/denvergov/Portals/771/documents/PHI/Food/RevisedFoodRulesandregulationsApril2017compressed.pdf", "application/pdf"),
+            ("https://denver.prelive.opencities.com/files/assets/public/v/1/public-health-and-environment/documents/phi/2022_mobileunitguide.pdf", "application/pdf")
         ]
         
         # Create unique vector DB identifier
@@ -97,12 +98,12 @@ def initialize_llama_stack():
         
         # Ingest documents into vector DB for RAG search
         documents = [
-            Document(
+            RAGDocument(
                 document_id=f"permit-doc-{i}",
                 content=url,
                 mime_type="application/pdf",  # Llama Stack extracts text automatically for PDF
                 metadata={"source": "DenverPermitPDF"}
-            ) for i, url in enumerate(permit_pdf_urls)
+            ) for i, (url, mime_type) in enumerate(permit_pdf_urls)
         ]
         
         client.tool_runtime.rag_tool.insert(
