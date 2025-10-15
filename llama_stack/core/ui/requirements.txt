@@ -3,3 +3,4 @@ llama-stack-client>=0.2.1
 pandas
 streamlit>=1.28
 streamlit-option-menu
+markdown
