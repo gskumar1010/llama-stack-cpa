@@ -8,16 +8,14 @@ WORKDIR /app
 
 # Copy the requirements file
 COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Ensure /app/.streamlit exists and is writable
-RUN mkdir -p /app/.streamlit
 
 ENV HOME=/app
 
 COPY . /app/
-RUN /usr/local/bin/python -m pip install --upgrade pip && \
-    /usr/local/bin/pip3 install -r requirements.txt
+
 EXPOSE 8501
 
 # ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
-ENTRYPOINT ["/root/.local/bin/streamlit", "run", "city-permitting-streamlit.py", "--server.port=8501", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "city-permitting-streamlit.py", "--server.port=8501", "--server.address=0.0.0.0"]
