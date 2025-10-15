@@ -9,7 +9,7 @@ WORKDIR /app
 RUN mkdir -p /app/.streamlit
 
 # Optionally, run as a non-root user (for better security)
-RUN useradd -m -u 1000 appuser
+RUN useradd -m -u 1001 appuser
 RUN chown -R appuser:appuser /app
 
 # Copy the requirements file
@@ -20,7 +20,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 ENV HOME=/app
 
 COPY . /app/
-
+USER 1001
 EXPOSE 8501
 
 # ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
