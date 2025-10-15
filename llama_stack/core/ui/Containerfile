@@ -9,19 +9,10 @@ WORKDIR /app
 # Copy the requirements file
 COPY requirements.txt .
 
-# Add the directory containing the streamlit executable to the PATH
-ENV PATH="/root/.local/bin:${PATH}"
-
-
 # Ensure /app/.streamlit exists and is writable
 RUN mkdir -p /app/.streamlit
 
-# Optionally, run as a non-root user (for better security)
-RUN useradd -m -u 1000 appuser
-RUN chown -R appuser:appuser /app
-USER appuser
 ENV HOME=/app
-
 
 COPY . /app/
 RUN /usr/local/bin/python -m pip install --upgrade pip && \
@@ -29,4 +20,4 @@ RUN /usr/local/bin/python -m pip install --upgrade pip && \
 EXPOSE 8501
 
 # ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
-ENTRYPOINT ["streamlit", "run", "city-permitting-streamlit.py", "--server.port=8501", "--server.address=0.0.0.0"]
+ENTRYPOINT ["/root/.local/bin/streamlit", "run", "city-permitting-streamlit.py", "--server.port=8501", "--server.address=0.0.0.0"]
