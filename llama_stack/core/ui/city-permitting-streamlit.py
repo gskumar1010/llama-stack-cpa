@@ -73,10 +73,10 @@ def initialize_llama_stack():
     """Initialize Llama Stack client and agent"""
     try:
         # Connect to your Llama Stack server
-        client = LlamaStackClient(base_url="http://localhost:8321")  # Adapt as needed
+        client = LlamaStackClient(base_url="http://llamastack-server.llama-serve.svc.cluster.local:8321")  # Adapt as needed
         
         # Model: Llama-4-Scout-17B-16E-w4a16 (adjust to your deployment/model)
-        model_id = "meta-llama/Llama-4-Scout-17B-16E-Instruct"
+        model_id = "llama-4-scout-17b-16e-w4a16"
         
         # List of city PDF URLs for ingestion
         permit_pdf_urls = [
