@@ -3,6 +3,16 @@
 
 FROM python:3.12-slim
 
+# Set the working directory
+WORKDIR /app
+
+# Copy the requirements file
+COPY requirements.txt .
+
+# Add the directory containing the streamlit executable to the PATH
+ENV PATH="/root/.local/bin:${PATH}"
+
+
 # Ensure /app/.streamlit exists and is writable
 RUN mkdir -p /app/.streamlit
 
@@ -13,7 +23,6 @@ USER appuser
 ENV HOME=/app
 
 
-WORKDIR /app
 COPY . /app/
 RUN /usr/local/bin/python -m pip install --upgrade pip && \
     /usr/local/bin/pip3 install -r requirements.txt
