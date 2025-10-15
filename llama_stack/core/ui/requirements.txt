@@ -1,5 +1,5 @@
 llama-stack>=0.2.1
 llama-stack-client>=0.2.1
 pandas
-streamlit
+streamlit>=1.28
 streamlit-option-menu
