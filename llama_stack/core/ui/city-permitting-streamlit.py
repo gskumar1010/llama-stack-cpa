@@ -365,8 +365,7 @@ Base your response on the regulations provided above."""
             # Get LLM response using Responses API (chat completion)
             response = self.client.inference.chat_completion(
                 model_id=Config.MODEL_ID,
-                messages=self.messages,
-                max_tokens=2048
+                messages=self.messages
             )
             
             # Extract response content
