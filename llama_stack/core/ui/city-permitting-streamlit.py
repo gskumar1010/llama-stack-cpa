@@ -335,8 +335,7 @@ Always be professional, thorough, and cite specific regulations when providing f
             # Query vector database for relevant context
             rag_results = self.client.tool_runtime.rag_tool.query(
                 content=query,
-                vector_db_ids=[self.vector_db_id],
-                max_chunks=5
+                vector_db_ids=[self.vector_db_id]
             )
             
             # Extract context from RAG results
