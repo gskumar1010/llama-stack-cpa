@@ -4,3 +4,4 @@ pandas
 streamlit>=1.28
 streamlit-option-menu
 markdown
+pypdf
