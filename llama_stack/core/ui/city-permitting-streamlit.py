@@ -366,7 +366,6 @@ Base your response on the regulations provided above."""
             response = self.client.inference.chat_completion(
                 model_id=Config.MODEL_ID,
                 messages=self.messages,
-                temperature=0.2,
                 max_tokens=2048
             )
             
